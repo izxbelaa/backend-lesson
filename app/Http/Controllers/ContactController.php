@@ -24,6 +24,11 @@ class ContactController extends Controller
         return response()->json($contact, 201);
     }
 
+    public function show(Contact $contact)
+    {
+        return $contact;
+    }
+
     private function filters($query, array $filters): void
     {
         $query

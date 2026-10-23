@@ -77,3 +77,17 @@ Content-Type: application/json
     "last_name": "Brown",
     "email": "anna.brown@example.com"
 }
+
+
+### View contact with  ID
+GET http://127.0.0.1:8000/api/contacts/151
+Accept: application/json
+
+### View contact with  non existing ID
+GET http://127.0.0.1:8000/api/contacts/999
+Accept: application/json
+
+### View contact with  non numeric ID
+GET http://127.0.0.1:8000/api/contacts/test
+Accept: application/json
+

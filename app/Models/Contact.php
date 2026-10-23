@@ -13,6 +13,13 @@ class Contact extends Model
     /** @use HasFactory<\Database\Factories\ContactsFactory> */
     use HasFactory;
 
+     protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
+
     public function matters(): HasMany
     {
         return $this->hasMany(Matter::class);
