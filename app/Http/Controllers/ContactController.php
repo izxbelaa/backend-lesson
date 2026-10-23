@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\IndexRequest;
+use App\Http\Requests\StoreRequest;
 
 class ContactController extends Controller
 {
     public function index(IndexRequest $request)
     {
-        $query = Contact::query()->withCount('matters');
+        $contacts = Contact::query()->withCount('matters');
 
-        $this->filters($query, $request->validated());
+        $this->filters($contacts, $request->validated());
 
-        return $query->get();
+        return $contacts->get();
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $contact = Contact::create($request->validated());
+
+        return response()->json($contact, 201);
     }
 
     private function filters($query, array $filters): void

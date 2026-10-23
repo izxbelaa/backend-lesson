@@ -3,7 +3,7 @@ GET http://127.0.0.1:8000/api/contacts
 Accept: application/json
 
 ### Get contact with valid first name
-GET http://127.0.0.1:8000/api/contacts/?first_name=Jane
+GET http://127.0.0.1:8000/api/contacts/?first_name=Tereza
 Accept: application/json
 
 ### Get contact with invalid first name type
@@ -14,3 +14,66 @@ Accept: application/json
 GET http://127.0.0.1:8000/api/contacts/?email=invalid-email
 Accept: application/json
 
+### Create a valid contact
+POST http://127.0.0.1:8000/api/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Tereza",
+    "last_name": "Smith",
+    "email": "tereza.smith@example.com"
+}
+
+### Create an invalid contact with missing first name
+POST http://127.0.0.1:8000/api/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "last_name": "Smith",
+    "email": "jane.test123@example.com"
+}
+
+### Create an invalid contact withe already existing email
+POST http://127.0.0.1:8000/api/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Toby",
+    "last_name": "Smith",
+    "email": "jane.test123@example.com"
+}
+
+### Create an invalid contact withe invalid  email
+POST http://127.0.0.1:8000/api/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Jenice",
+    "last_name": "Smith",
+    "email": "invalid-email"
+}
+
+### Empty body request
+POST http://127.0.0.1:8000/api/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+
+}
+
+### Create contact with extra ID
+POST http://127.0.0.1:8000/api/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "id": 9999,
+    "first_name": "Anna",
+    "last_name": "Brown",
+    "email": "anna.brown@example.com"
+}
