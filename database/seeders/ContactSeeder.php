@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Seeders;
+use App\Models\Matter;
+use App\Models\Contact;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class ContactSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        DB::transaction(function () {
+            Contact::factory()
+                ->count(50)
+                ->create()
+                ->each(function (Contact $contact) {
+                    Matter::factory()
+                        ->count(rand(0, 5))
+                        ->for($contact)
+                        ->create();
+                });
+        });
+    }
+}
