@@ -1,0 +1,16 @@
+### Get all contacts
+GET http://127.0.0.1:8000/api/contacts
+Accept: application/json
+
+### Get contact with valid first name
+GET http://127.0.0.1:8000/api/contacts/?first_name=Jane
+Accept: application/json
+
+### Get contact with invalid first name type
+GET http://127.0.0.1:8000/api/contacts/?first_name[]=x
+Accept: application/json
+
+### Get contact with invalid email
+GET http://127.0.0.1:8000/api/contacts/?email=invalid-email
+Accept: application/json
+

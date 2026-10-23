@@ -11,7 +11,7 @@ class Contact extends Model
     /** @use HasFactory<\Database\Factories\ContactsFactory> */
     use HasFactory;
 
-    public function matter(): HasMany
+    public function matters(): HasMany
     {
         return $this->hasMany(Matter::class);
     }
