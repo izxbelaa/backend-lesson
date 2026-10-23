@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Requests;
-use Illuminate\Validation\Rule;
+
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -23,9 +24,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-         'first_name' => ['required', 'string', 'max:20'],
-         'last_name' => ['required', 'string', 'max:20'],
-         'email' => ['required', 'string', 'email', 'max:255', Rule::unique('contacts', 'email')],
+            'first_name' => ['required', 'string', 'max:20'],
+            'last_name' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('contacts', 'email')],
         ];
     }
 }

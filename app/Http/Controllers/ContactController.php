@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Contact;
-use Illuminate\Http\Request;
+
 use App\Http\Requests\IndexRequest;
 use App\Http\Requests\StoreRequest;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
