@@ -91,3 +91,44 @@ Accept: application/json
 GET http://127.0.0.1:8000/api/contacts/test
 Accept: application/json
 
+
+### V2 Get all contacts
+GET http://127.0.0.1:8000/api/v2/contacts?page=3
+Accept: application/json
+
+### V2 Store a new contact
+POST http://127.0.0.1:8000/api/v2/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Tereza",
+    "last_name": "Smith",
+    "email": "tereza399@example.com"
+}
+
+### V2 Store a new contact with invalid email
+POST http://127.0.0.1:8000/api/v2/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "first_name": "Tereza",
+    "last_name": "Smith",
+    "email": "1"
+}
+### V2 Store an empty body
+POST http://127.0.0.1:8000/api/v2/contacts
+Accept: application/json
+Content-Type: application/json
+
+{
+}
+
+### V2 view contact with valid ID
+GET http://127.0.0.1:8000/api/v2/contacts/111
+Accept: application/json
+
+### V2 view contact with invalid ID
+GET http://127.0.0.1:8000/api/v2/contacts/999
+Accept: application/json
