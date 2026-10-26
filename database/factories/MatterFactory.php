@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Matter;
+use app\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class MatterFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
-            'status' => fake()->randomElement(['open', 'closed', 'pending']),
+            'status' => fake()->randomElement([Status::OPEN, Status::CLOSED, Status::PENDING]),
         ];
     }
 }

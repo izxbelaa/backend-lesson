@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\ApplyContactFilters;
 use App\Http\Requests\IndexRequest;
 use App\Http\Requests\StoreRequest;
 use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function index(IndexRequest $request)
+    public function index(IndexRequest $request, ApplyContactFilters $applyContactFilters)
     {
         $contacts = Contact::query()->withCount('matters');
 
-        $this->filters($contacts, $request->validated());
+        $applyContactFilters->handle($contacts, $request->validated());
 
         return $contacts->get();
     }
@@ -27,22 +28,5 @@ class ContactController extends Controller
     public function show(Contact $contact)
     {
         return $contact;
-    }
-
-    private function filters($query, array $filters): void
-    {
-        $query
-            ->when(
-                isset($filters['first_name']),
-                fn ($query) => $query->where('first_name', $filters['first_name'])
-            )
-            ->when(
-                isset($filters['last_name']),
-                fn ($query) => $query->where('last_name', $filters['last_name'])
-            )
-            ->when(
-                isset($filters['email']),
-                fn ($query) => $query->where('email', $filters['email'])
-            );
     }
 }

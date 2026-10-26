@@ -17,13 +17,8 @@ class ContactSeeder extends Seeder
         DB::transaction(function () {
             Contact::factory()
                 ->count(50)
-                ->create()
-                ->each(function (Contact $contact) {
-                    Matter::factory()
-                        ->count(rand(0, 5))
-                        ->for($contact)
-                        ->create();
-                });
+                ->has(Matter::factory()->count(rand(0, 5)), 'matters')
+                ->create();
         });
     }
 }
