@@ -2,14 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Mail\WelcomeEmail;
+use App\Actions\SendContactWelcomeEmail;
 use App\Models\Contact;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\Attributes\Backoff;
 use Illuminate\Queue\Attributes\Tries;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Throwable;
 
 // 3 retries with 10 seconds backoff each
@@ -18,6 +17,9 @@ use Throwable;
 class SendWelcomeEmail implements ShouldQueue
 {
     use Queueable;
+
+    // time out < retry after
+    public int $timeout = 60;
 
     /**
      * Create a new job instance.
@@ -29,10 +31,9 @@ class SendWelcomeEmail implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(SendContactWelcomeEmail $action): void
     {
-        Mail::to($this->contact->email)
-            ->send(new WelcomeEmail($this->contact));
+        $action->handle($this->contact);
     }
 
     /**

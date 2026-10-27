@@ -126,9 +126,9 @@ Content-Type: application/json
 }
 
 ### V2 view contact with valid ID
-GET http://127.0.0.1:8000/api/v2/contacts/111
+GET http://127.0.0.1:8000/api/v2/contacts/999
 Accept: application/json
 
 ### V2 view contact with invalid ID
-GET http://127.0.0.1:8000/api/v2/contacts/999
+GET http://127.0.0.1:8000/api/v2/contacts/0
 Accept: application/json
