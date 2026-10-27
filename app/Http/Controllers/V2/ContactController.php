@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V2;
 
 use App\Actions\ApplyContactFilters;
+use App\Actions\CreateContact;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexRequest;
 use App\Http\Requests\StoreRequest;
@@ -28,9 +29,9 @@ class ContactController extends Controller
     }
 
     #[Authorize('create', Contact::class)]
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, CreateContact $action)
     {
-        $contact = Contact::create($request->validated());
+        $contact = $action->handle($request->validated());
 
         return new ContactResource($contact);
     }
