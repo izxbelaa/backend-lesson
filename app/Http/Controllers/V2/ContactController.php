@@ -17,7 +17,10 @@ class ContactController extends Controller
     #[Authorize('viewAny', Contact::class)]
     public function index(IndexRequest $request, ApplyContactFilters $applyContactFilters)
     {
-        $contacts = Contact::query()->withCount('matters')->with('matters');
+        $contacts = Contact::query()
+            ->active()
+            ->withCount('matters')
+            ->with('matters');
 
         $applyContactFilters->handle($contacts, $request->validated());
 
